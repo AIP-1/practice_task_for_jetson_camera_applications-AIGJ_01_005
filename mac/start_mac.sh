@@ -1,7 +1,7 @@
 #!/bin/zsh
 # 맥 카메라(가짜 IP 카메라) → mediamtx(RTSP) → ssh 역방향 터널 → 젯슨 rtsp://localhost:8554/mac
 # 끄기: zsh stop_cams.sh   (젯슨 주소는 JETSON 변수로 바꾼다)
-JETSON=${JETSON:-team2-2@100.92.224.43}
+JETSON=${JETSON:?"젯슨 주소를 넣어 실행: JETSON=계정@<보드 주소> zsh start_mac.sh"}
 LOG=~/Downloads/cam_logs; mkdir -p $LOG
 pkill mediamtx 2>/dev/null; pkill -f "rtsp://localhost:8554/" 2>/dev/null; sleep 1
 /opt/homebrew/opt/mediamtx/bin/mediamtx /opt/homebrew/etc/mediamtx/mediamtx.yml > $LOG/mediamtx.log 2>&1 &

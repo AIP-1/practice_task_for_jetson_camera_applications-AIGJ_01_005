@@ -3,7 +3,7 @@
 
   # ① 입력별 측정: 첫 프레임 지연 · 실측 FPS · 해상도 · CPU 사용률
   python cam1.py probe --src 0                                  # USB 웹캠 (/dev/video0)
-  python cam1.py probe --src rtsp://100.90.28.125:8554/mac      # 맥 카메라 (IP 카메라 역할)
+  python cam1.py probe --src rtsp://<맥 주소>:8554/mac      # 맥 카메라 (IP 카메라 역할)
 
   # ② 수신 방식 비교: 0.2초 처리 지연을 넣고 2분 뒤 지연이 얼마나 쌓이는지
   python cam1.py lag --src <입력> --reader a      # (a) cap.read()를 그대로 반복

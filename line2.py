@@ -53,7 +53,7 @@ threading.Thread(target=lambda: ThreadingHTTPServer(("0.0.0.0", a.port), H).serv
 m = YOLO(a.model, task="detect")
 lx1, ly1, lx2, ly2 = map(float, a.line.split(","))
 side, log = {}, open("runs/line2_log.jsonl", "a")
-print(f"웹 화면: http://100.92.224.43:{a.port}   MQTT: {a.topic}   여유 폭 {a.margin}")
+print(f"웹 화면: http://<보드 주소>:{a.port}   MQTT: {a.topic}   여유 폭 {a.margin}")
 n, t0 = 0, time.time()
 while True:
     with lk: f = None if latest["f"] is None else latest["f"].copy()

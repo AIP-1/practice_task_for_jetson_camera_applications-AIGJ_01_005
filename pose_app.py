@@ -35,7 +35,7 @@ MODE = "raw" if args.raw else "smooth"
 FILE = args.src != "rtsp" and not args.src.isdigit()   # 영상 파일로 같은 장면을 반복 비교
 
 CAM_IP = os.environ.get("VIGI_IP", "10.42.0.111")   # Jetson 유선 포트의 VIGI 카메라. 주소가 바뀌면 find_cam_ip()가 다시 찾는다
-CAM_MAC = "20:e1:5d:a8:f2:b2"
+CAM_MAC = os.environ.get("VIGI_MAC", "")   # 카메라 MAC은 저장소에 넣지 않고 환경 변수로 준다
 W, H = 1280, 720         # USB 웹캠일 때만 사용
 SMOOTH_S = 0.6        # 다수결 창(초)
 WAVE_S = 1.5          # 손 흔들기 판정 창(초)
@@ -273,6 +273,8 @@ def publish(name, data, retain=False):
     subprocess.Popen(cmd + (["-r"] if retain else []), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def find_cam_ip():
+    if not CAM_MAC:          # MAC을 안 주면 주소 다시 찾기를 건너뜀
+        return None
     """DHCP로 카메라 주소가 바뀌어도 MAC 주소로 다시 찾는다 (재부팅 뒤 자동 복귀용)"""
     pings = [subprocess.Popen(["ping", "-c1", "-W1", f"10.42.0.{i}"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
              for i in range(100, 131)]

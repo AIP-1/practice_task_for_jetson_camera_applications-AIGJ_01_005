@@ -64,7 +64,7 @@ obj_pts, img_pts, last_t, last_c, prev = [], [], 0, None, None
 cells = {}
 crit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 print(f"체커보드({a.cols}x{a.rows})를 화면 곳곳·여러 각도로 천천히 움직이세요. 목표 {a.n}장")
-print(f"진행 화면: http://100.92.224.43:{a.port}  (맥 브라우저)")
+print(f"진행 화면: http://<보드 주소>:{a.port}  (맥 브라우저)")
 while len(img_pts) < a.n:
     with lock:
         f = None if latest["f"] is None else latest["f"].copy()

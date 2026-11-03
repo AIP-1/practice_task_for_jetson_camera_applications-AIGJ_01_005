@@ -3,7 +3,7 @@
  ② YOLO 박스를 이미지 임베딩(EmbeddingGemma 2)으로 재라벨 (유사도 < 0.20 이면 YOLO 라벨 유지)
  ③ 개방 어휘 검출 YOLOE (텍스트로 클래스 지정)
 물품 하나씩: 준비 15초 → 측정 8초 동안 매 프레임 판정, 가장 많이 나온 답을 기록
-사용법: python -u vocab2.py --item 빗      (웹 http://100.92.224.43:8097 에서 화면 확인)
+사용법: python -u vocab2.py --item 빗      (웹 http://<보드 주소>:8097 에서 화면 확인)
 결과: runs/vocab2_r2.csv, 스냅샷 runs/vocab2_<물품>.jpg
 """
 import argparse, csv, os, threading, time, json
@@ -50,7 +50,7 @@ function img(){const n=new Image();n.onload=()=>{i.src=n.src;setTimeout(img,120)
 async function st(){try{t.textContent=await (await fetch('/st')).json()}catch(e){t.textContent='꺼짐'}setTimeout(st,300)}img();st();</script></body>"""
         self.send_response(200); self.send_header("Content-Type", "text/html; charset=utf-8"); self.end_headers(); self.wfile.write(html.encode())
 threading.Thread(target=lambda: ThreadingHTTPServer(("0.0.0.0", a.port), H).serve_forever(), daemon=True).start()
-print(f"웹 화면: http://100.92.224.43:{a.port}")
+print(f"웹 화면: http://<보드 주소>:{a.port}")
 
 det = YOLO("engines/yolo11n_fp16.engine" if os.path.exists("engines/yolo11n_fp16.engine") else "yolo11n.pt", task="detect")
 yoloe = YOLO("yoloe-11s-seg.pt"); yoloe.set_classes(names_en, yoloe.get_text_pe(names_en))
