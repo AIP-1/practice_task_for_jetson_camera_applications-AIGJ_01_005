@@ -1,0 +1,9 @@
+.env
+*.env
+__pycache__/
+*.pyc
+*.pt
+*.engine
+*.onnx
+mall_dataset/
+.DS_Store
